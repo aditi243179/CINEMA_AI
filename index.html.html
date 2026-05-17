@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CinemaAI — Create Cinematic AI Videos Free</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0f;
+  --dark: #0f0f1a;
+  --card: #14141f;
+  --card2: #1a1a2e;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.15);
+  --accent: #7c3aed;
+  --accent2: #a855f7;
+  --accent3: #c084fc;
+  --teal: #06b6d4;
+  --pink: #ec4899;
+  --gold: #f59e0b;
+  --text: #f1f0ff;
+  --muted: #8b8aa0;
+  --muted2: #b0afc8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--black);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 4rem;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:1.5rem;font-weight:800;
+  background:linear-gradient(135deg,#c084fc,#06b6d4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:.9rem;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{
+  background:linear-gradient(135deg,var(--accent),var(--teal));
+  border:none;padding:.6rem 1.5rem;border-radius:50px;
+  color:#fff;font-family:'DM Sans',sans-serif;font-weight:500;
+  font-size:.9rem;cursor:pointer;transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.85;}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:8rem 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(124,58,237,0.25) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 60%,rgba(6,182,212,0.12) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 70%,rgba(236,72,153,0.1) 0%,transparent 60%);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.4);
+  padding:.4rem 1rem;border-radius:50px;font-size:.8rem;color:var(--accent3);
+  margin-bottom:2rem;position:relative;z-index:1;
+  animation:fadeUp .8s ease both;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:800;line-height:1.05;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .1s ease both;
+  max-width:900px;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,#c084fc 0%,#06b6d4 50%,#f59e0b 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{
+  font-size:1.15rem;color:var(--muted2);
+  max-width:600px;margin:1.5rem auto 0;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-top:2.5rem;position:relative;z-index:1;
+  animation:fadeUp .8s .3s ease both;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#a855f7);
+  border:none;padding:.9rem 2.2rem;border-radius:50px;
+  color:#fff;font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 0 40px rgba(124,58,237,0.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(124,58,237,0.6);}
+.btn-outline{
+  background:transparent;border:1px solid var(--border2);
+  padding:.9rem 2.2rem;border-radius:50px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:1rem;cursor:pointer;
+  transition:background .2s,border-color .2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.3);}
+.hero-stats{
+  display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;
+  margin-top:3.5rem;position:relative;z-index:1;
+  animation:fadeUp .8s .4s ease both;
+}
+.stat{text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);}
+.stat-label{font-size:.8rem;color:var(--muted);margin-top:.2rem;}
+
+/* VIDEO PREVIEW */
+.video-showcase{
+  margin:2rem auto 0;
+  max-width:900px;width:90%;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .5s ease both;
+}
+.video-frame{
+  border-radius:16px;overflow:hidden;
+  border:1px solid var(--border2);
+  background:var(--card);
+  aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.video-frame-inner{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#1a0a2e,#0a1a2e,#0a2e1a);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1rem;
+  position:relative;
+  overflow:hidden;
+}
+.vid-grid{
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.03) 40px);
+}
+.play-btn{
+  width:70px;height:70px;border-radius:50%;
+  background:rgba(124,58,237,0.8);border:2px solid rgba(255,255,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform .2s;position:relative;z-index:2;
+}
+.play-btn:hover{transform:scale(1.1);}
+.play-btn svg{width:28px;height:28px;fill:#fff;margin-left:4px;}
+.vid-caption{color:var(--muted2);font-size:.85rem;position:relative;z-index:2;}
+.vid-pills{
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;gap:.5rem;z-index:3;flex-wrap:wrap;justify-content:center;
+}
+.vid-pill{
+  background:rgba(0,0,0,0.6);border:1px solid var(--border2);
+  padding:.3rem .8rem;border-radius:50px;font-size:.7rem;color:var(--muted2);
+}
+
+/* SECTION HEADERS */
+section{padding:6rem 2rem;}
+.section-label{
+  display:inline-block;
+  font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent3);margin-bottom:1rem;font-weight:500;
+}
+.section-title{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;
+  line-height:1.1;margin-bottom:1rem;
+}
+.section-sub{color:var(--muted2);font-size:1.05rem;max-width:550px;}
+.center{text-align:center;display:flex;flex-direction:column;align-items:center;}
+
+/* TOOLS GRID */
+.tools-section{background:var(--dark);}
+.tools-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;margin-top:3rem;max-width:1200px;margin-left:auto;margin-right:auto;
+}
+.tool-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;cursor:pointer;
+}
+.tool-card:hover{border-color:var(--border2);transform:translateY(-4px);}
+.tool-card::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity .3s;border-radius:16px;
+}
+.tool-card:hover::before{opacity:1;}
+.tc-purple::before{background:radial-gradient(ellipse at top left,rgba(124,58,237,0.15),transparent 60%);}
+.tc-teal::before{background:radial-gradient(ellipse at top left,rgba(6,182,212,0.15),transparent 60%);}
+.tc-pink::before{background:radial-gradient(ellipse at top left,rgba(236,72,153,0.15),transparent 60%);}
+.tc-gold::before{background:radial-gradient(ellipse at top left,rgba(245,158,11,0.15),transparent 60%);}
+.tc-blue::before{background:radial-gradient(ellipse at top left,rgba(59,130,246,0.15),transparent 60%);}
+.tc-green::before{background:radial-gradient(ellipse at top left,rgba(34,197,94,0.15),transparent 60%);}
+.tool-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;font-size:1.5rem;position:relative;z-index:1;
+}
+.ti-purple{background:rgba(124,58,237,0.2);}
+.ti-teal{background:rgba(6,182,212,0.2);}
+.ti-pink{background:rgba(236,72,153,0.2);}
+.ti-gold{background:rgba(245,158,11,0.2);}
+.ti-blue{background:rgba(59,130,246,0.2);}
+.ti-green{background:rgba(34,197,94,0.2);}
+.tool-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;position:relative;z-index:1;}
+.tool-card p{font-size:.88rem;color:var(--muted2);line-height:1.6;position:relative;z-index:1;}
+.tool-tag{
+  display:inline-block;margin-top:.8rem;font-size:.72rem;
+  padding:.25rem .7rem;border-radius:50px;font-weight:500;
+  position:relative;z-index:1;
+}
+.tag-free{background:rgba(34,197,94,0.15);color:#4ade80;}
+.tag-new{background:rgba(124,58,237,0.2);color:var(--accent3);}
+.tag-hot{background:rgba(245,158,11,0.15);color:#fbbf24;}
+
+/* EFFECTS STRIP */
+.effects-section{overflow:hidden;padding:3rem 0;}
+.effects-label{text-align:center;margin-bottom:2rem;}
+.scroll-strip{display:flex;gap:1rem;animation:scrollLeft 30s linear infinite;width:max-content;}
+.scroll-strip2{animation-direction:reverse;}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.effect-card{
+  width:160px;height:200px;border-radius:12px;
+  background:var(--card);border:1px solid var(--border);
+  flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  padding:1rem;position:relative;overflow:hidden;
+}
+.effect-bg{
+  position:absolute;inset:0;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.5rem;
+}
+.effect-name{font-size:.78rem;font-weight:500;position:relative;z-index:1;color:var(--text);}
+
+/* HOW IT WORKS */
+.steps{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;margin-top:3rem;max-width:1000px;margin-left:auto;margin-right:auto;
+}
+.step{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;text-align:center;
+  position:relative;
+}
+.step-num{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+  margin:0 auto 1rem;color:#fff;
+}
+.step h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.step p{font-size:.85rem;color:var(--muted2);}
+
+/* CAMERA PRESETS */
+.presets-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:1rem;margin-top:2.5rem;max-width:1100px;margin-left:auto;margin-right:auto;
+}
+.preset-chip{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1rem;text-align:center;
+  transition:all .2s;cursor:pointer;
+}
+.preset-chip:hover{background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.5);}
+.preset-emoji{font-size:1.5rem;display:block;margin-bottom:.4rem;}
+.preset-name{font-size:.78rem;color:var(--muted2);}
+
+/* GALLERY */
+.gallery{background:var(--dark);}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1rem;margin-top:2.5rem;max-width:1200px;margin-left:auto;margin-right:auto;
+}
+.gallery-card{
+  border-radius:12px;overflow:hidden;
+  background:var(--card);border:1px solid var(--border);
+  transition:transform .3s,border-color .3s;cursor:pointer;
+  position:relative;
+}
+.gallery-card:hover{transform:scale(1.02);border-color:var(--border2);}
+.gallery-thumb{
+  aspect-ratio:9/16;max-height:300px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;
+}
+.gallery-info{padding:.75rem 1rem;}
+.gallery-info h4{font-size:.85rem;font-weight:500;margin-bottom:.2rem;}
+.gallery-info span{font-size:.72rem;color:var(--muted);}
+.like-btn{
+  position:absolute;top:.6rem;right:.6rem;
+  background:rgba(0,0,0,0.5);border:none;border-radius:50px;
+  padding:.3rem .7rem;font-size:.72rem;color:var(--muted2);
+  cursor:pointer;transition:color .2s;
+}
+.like-btn:hover{color:var(--pink);}
+
+/* PRICING */
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;margin-top:3rem;max-width:1000px;margin-left:auto;margin-right:auto;
+}
+.price-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem;
+  transition:transform .3s;
+}
+.price-card.featured{
+  background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,182,212,0.1));
+  border-color:rgba(124,58,237,0.5);
+  transform:scale(1.03);
+}
+.price-card:hover{transform:translateY(-4px);}
+.price-card.featured:hover{transform:scale(1.03) translateY(-4px);}
+.price-badge{
+  display:inline-block;background:linear-gradient(135deg,var(--accent),var(--teal));
+  padding:.25rem .75rem;border-radius:50px;font-size:.72rem;color:#fff;font-weight:500;
+  margin-bottom:1rem;
+}
+.price-name{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;}
+.price-amount{
+  font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;
+  margin:.5rem 0;color:var(--text);
+}
+.price-amount span{font-size:1rem;font-weight:400;color:var(--muted);}
+.price-desc{font-size:.85rem;color:var(--muted2);margin-bottom:1.5rem;}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem;}
+.price-features li{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted2);}
+.price-features li::before{content:'✓';color:#4ade80;font-weight:700;flex-shrink:0;}
+.price-features li.no::before{content:'✗';color:var(--muted);}
+.price-features li.no{color:var(--muted);}
+.price-btn{
+  width:100%;padding:.85rem;border-radius:50px;font-family:'DM Sans',sans-serif;
+  font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s;border:none;
+}
+.price-btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text);}
+.price-btn-outline:hover{background:rgba(255,255,255,0.05);}
+.price-btn-fill{
+  background:linear-gradient(135deg,var(--accent),var(--teal));color:#fff;
+  box-shadow:0 0 30px rgba(124,58,237,0.3);
+}
+.price-btn-fill:hover{box-shadow:0 0 50px rgba(124,58,237,0.5);}
+
+/* TESTIMONIALS */
+.testi-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;margin-top:3rem;max-width:1100px;margin-left:auto;margin-right:auto;
+}
+.testi-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.8rem;
+}
+.testi-stars{color:#f59e0b;margin-bottom:1rem;font-size:1rem;letter-spacing:.1em;}
+.testi-text{font-size:.9rem;color:var(--muted2);line-height:1.7;margin-bottom:1.5rem;}
+.testi-author{display:flex;align-items:center;gap:.75rem;}
+.testi-avatar{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.9rem;flex-shrink:0;
+}
+.testi-name{font-size:.88rem;font-weight:500;}
+.testi-role{font-size:.75rem;color:var(--muted);}
+
+/* FAQ */
+.faq{max-width:750px;margin:3rem auto 0;}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;cursor:pointer;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;font-weight:500;font-size:1rem;}
+.faq-icon{font-size:1.3rem;color:var(--accent3);transition:transform .3s;}
+.faq-a{font-size:.88rem;color:var(--muted2);max-height:0;overflow:hidden;transition:max-height .3s,margin .3s;line-height:1.7;}
+.faq-item.open .faq-a{max-height:200px;margin-top:.75rem;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+
+/* CTA SECTION */
+.cta-section{
+  text-align:center;padding:8rem 2rem;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(124,58,237,0.18),transparent 70%);
+}
+.cta-section h2{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;
+  max-width:700px;margin:0 auto 1rem;
+}
+.cta-section p{color:var(--muted2);font-size:1.05rem;margin-bottom:2.5rem;}
+
+/* FOOTER */
+footer{
+  background:var(--dark);border-top:1px solid var(--border);
+  padding:3rem 4rem 2rem;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr repeat(3,1fr);
+  gap:3rem;margin-bottom:3rem;max-width:1200px;margin-left:auto;margin-right:auto;
+}
+.footer-brand p{color:var(--muted);font-size:.85rem;margin-top:.5rem;max-width:250px;}
+.footer-col h4{font-size:.85rem;font-weight:600;margin-bottom:1rem;color:var(--text);}
+.footer-col a{display:block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:.5rem;transition:color .2s;}
+.footer-col a:hover{color:var(--muted2);}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:1.5rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  max-width:1200px;margin:0 auto;
+}
+.footer-bottom p{font-size:.8rem;color:var(--muted);}
+.social-links{display:flex;gap:1rem;}
+.social-links a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s;}
+.social-links a:hover{color:var(--text);}
+
+/* COMPARE TABLE */
+.compare-wrapper{overflow-x:auto;margin-top:2.5rem;}
+.compare-table{width:100%;border-collapse:collapse;max-width:900px;margin:0 auto;}
+.compare-table th{
+  padding:1rem 1.5rem;text-align:left;font-size:.8rem;
+  font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:.1em;
+  border-bottom:1px solid var(--border);
+}
+.compare-table td{padding:1rem 1.5rem;font-size:.88rem;border-bottom:1px solid var(--border);}
+.compare-table tr:hover td{background:rgba(255,255,255,0.02);}
+.compare-table .us{color:#4ade80;font-weight:500;}
+.compare-table .them{color:var(--muted);}
+.compare-table .highlight{background:rgba(124,58,237,0.06);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero h1{font-size:2.5rem;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid .footer-brand{grid-column:1/-1;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CinemaAI</div>
+  <ul class="nav-links">
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#effects">Effects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Start Free →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    New: Google Veo 3 + Sora 2 Models Now Live
+  </div>
+  <h1>Create <span>Cinematic AI Videos</span><br>From a Single Photo</h1>
+  <p>Transform your photos & ideas into stunning, viral-ready videos with 50+ camera presets, wild VFX effects, and Hollywood-grade AI models — all free to start.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">🎬 Create Free Video</button>
+    <button class="btn-outline" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">2M+</div><div class="stat-label">Videos Created</div></div>
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Camera Presets</div></div>
+    <div class="stat"><div class="stat-num">100+</div><div class="stat-label">VFX Effects</div></div>
+    <div class="stat"><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
+  </div>
+  <!-- Video Preview -->
+  <div class="video-showcase">
+    <div class="video-frame">
+      <div class="video-frame-inner">
+        <div class="vid-grid"></div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <p class="vid-caption">AI-generated cinematic short — no camera needed</p>
+        <div class="vid-pills">
+          <div class="vid-pill">Cinematic</div>
+          <div class="vid-pill">Slow Motion</div>
+          <div class="vid-pill">Drone Shot</div>
+          <div class="vid-pill">4K Export</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section" id="tools">
+  <div class="center">
+    <span class="section-label">Platform Tools</span>
+    <h2 class="section-title">Everything You Need to Go Viral</h2>
+    <p class="section-sub">A complete AI creative studio — image to video, text to video, LipSync, upscaling, and more.</p>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card tc-purple">
+      <div class="tool-icon ti-purple">🎬</div>
+      <h3>Text to Video</h3>
+      <p>Type any scene description and watch CinemaAI generate photorealistic, cinematic video clips with natural motion, lighting, and camera work in seconds.</p>
+      <span class="tool-tag tag-free">Free</span>
+    </div>
+    <div class="tool-card tc-teal">
+      <div class="tool-icon ti-teal">🖼️</div>
+      <h3>Image to Video</h3>
+      <p>Upload any photo — selfie, landscape, product — and transform it into a dynamic, living video with lifelike character movements and expressions.</p>
+      <span class="tool-tag tag-free">Free</span>
+    </div>
+    <div class="tool-card tc-pink">
+      <div class="tool-icon ti-pink">🎭</div>
+      <h3>VFX & Effects</h3>
+      <p>100+ wild visual effects — liquid metal transformation, fire, anime, gender swap, bald swipe, creepy doll, and more. One click, instant magic.</p>
+      <span class="tool-tag tag-hot">🔥 Most Popular</span>
+    </div>
+    <div class="tool-card tc-gold">
+      <div class="tool-icon ti-gold">🎥</div>
+      <h3>Cinema Studio</h3>
+      <p>50+ professional camera presets: crash zooms, dolly shots, FPV drone, arc movements, and more. Achieve Hollywood-style visuals without any equipment.</p>
+      <span class="tool-tag tag-new">✨ New</span>
+    </div>
+    <div class="tool-card tc-blue">
+      <div class="tool-icon ti-blue">💬</div>
+      <h3>LipSync Studio</h3>
+      <p>Upload any audio — voiceover, song, speech — and sync it perfectly to your character's lips. Create talking avatars, dubbed content, and more.</p>
+      <span class="tool-tag tag-new">✨ New</span>
+    </div>
+    <div class="tool-card tc-green">
+      <div class="tool-icon ti-green">⬆️</div>
+      <h3>Video Upscaler</h3>
+      <p>Upscale any AI-generated or uploaded video to 4K resolution. Sharper details, cleaner edges, cinematic clarity — powered by real-time AI enhancement.</p>
+      <span class="tool-tag tag-free">Free</span>
+    </div>
+    <div class="tool-card tc-purple">
+      <div class="tool-icon ti-purple">🖌️</div>
+      <h3>AI Image Generator</h3>
+      <p>Generate photorealistic images from text prompts — fashion, portraits, products, landscapes. Built for social media, marketing, and creative projects.</p>
+      <span class="tool-tag tag-free">Free</span>
+    </div>
+    <div class="tool-card tc-pink">
+      <div class="tool-icon ti-pink">✂️</div>
+      <h3>Background Remover</h3>
+      <p>Remove or replace backgrounds from images and videos in one click. Change scenes, add custom backdrops, or create transparent overlays instantly.</p>
+      <span class="tool-tag tag-free">Free</span>
+    </div>
+    <div class="tool-card tc-gold">
+      <div class="tool-icon ti-gold">🔄</div>
+      <h3>Ad Reference Tool</h3>
+      <p>Drop any viral ad and recreate it with your own product in seconds. Perfect for marketers and brands wanting to leverage trending content formats.</p>
+      <span class="tool-tag tag-new">✨ New</span>
+    </div>
+  </div>
+</section>
+
+<!-- EFFECTS STRIP -->
+<section class="effects-section" id="effects">
+  <div class="effects-label">
+    <span class="section-label">Visual Effects</span>
+    <h2 class="section-title" style="text-align:center">100+ Wild Effects</h2>
+  </div>
+  <div style="overflow:hidden;position:relative;">
+    <div class="scroll-strip">
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#1a0030,#4a0080)">🧜</div><span class="effect-name">Mermaid</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001a40,#0040a0)">⚡</div><span class="effect-name">Liquid Metal</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#400000,#a00000)">🧛</div><span class="effect-name">Vampire</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001a10,#004030)">🌊</div><span class="effect-name">Ocean Diver</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#1a1000,#403000)">🔥</div><span class="effect-name">Fire Trail</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#000a30,#001080)">🌌</div><span class="effect-name">Space Float</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#200020,#600060)">🪄</div><span class="effect-name">Anime Ninja</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001010,#003030)">🤖</div><span class="effect-name">Cyborg</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#300010,#800040)">🎭</div><span class="effect-name">Creepy Doll</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#101000,#302800)">🦁</div><span class="effect-name">Animal Morph</span></div>
+      <!-- Duplicate for infinite scroll -->
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#1a0030,#4a0080)">🧜</div><span class="effect-name">Mermaid</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001a40,#0040a0)">⚡</div><span class="effect-name">Liquid Metal</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#400000,#a00000)">🧛</div><span class="effect-name">Vampire</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001a10,#004030)">🌊</div><span class="effect-name">Ocean Diver</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#1a1000,#403000)">🔥</div><span class="effect-name">Fire Trail</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#000a30,#001080)">🌌</div><span class="effect-name">Space Float</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#200020,#600060)">🪄</div><span class="effect-name">Anime Ninja</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#001010,#003030)">🤖</div><span class="effect-name">Cyborg</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#300010,#800040)">🎭</div><span class="effect-name">Creepy Doll</span></div>
+      <div class="effect-card"><div class="effect-bg" style="background:linear-gradient(135deg,#101000,#302800)">🦁</div><span class="effect-name">Animal Morph</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="center">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">Create in 3 Simple Steps</h2>
+    <p class="section-sub">No technical skills. No expensive equipment. Just results.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Upload or Describe</h3>
+      <p>Upload a photo, or type a scene description. Choose from 50+ templates or start from scratch.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Choose Style & Effects</h3>
+      <p>Pick your camera movement, visual effect, AI model, and output format — all in one place.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Generate & Share</h3>
+      <p>AI generates your video in seconds. Download in HD, share directly to TikTok, Reels, or YouTube.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAMERA PRESETS -->
+<section style="background:var(--dark);">
+  <div class="center">
+    <span class="section-label">Cinema Studio</span>
+    <h2 class="section-title">50+ Camera Presets</h2>
+    <p class="section-sub">Professional cinematography at your fingertips — no film crew required.</p>
+  </div>
+  <div class="presets-grid">
+    <div class="preset-chip"><span class="preset-emoji">🔭</span><div class="preset-name">Crash Zoom</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🚁</span><div class="preset-name">FPV Drone</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🔄</span><div class="preset-name">360° Arc</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🎯</span><div class="preset-name">Dolly Push</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🌊</span><div class="preset-name">Parallax</div></div>
+    <div class="preset-chip"><span class="preset-emoji">📷</span><div class="preset-name">Pan Right</div></div>
+    <div class="preset-chip"><span class="preset-emoji">⬆️</span><div class="preset-name">Crane Rise</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🕊️</span><div class="preset-name">Hover Float</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🔍</span><div class="preset-name">Rack Focus</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🌀</span><div class="preset-name">Spiral</div></div>
+    <div class="preset-chip"><span class="preset-emoji">👁️</span><div class="preset-name">POV Shot</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🎬</span><div class="preset-name">Cinematic</div></div>
+    <div class="preset-chip"><span class="preset-emoji">⚡</span><div class="preset-name">Whip Pan</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🌅</span><div class="preset-name">Time Lapse</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🐌</span><div class="preset-name">Slow Motion</div></div>
+    <div class="preset-chip"><span class="preset-emoji">🖼️</span><div class="preset-name">Widescreen</div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="center">
+    <span class="section-label">Community Gallery</span>
+    <h2 class="section-title">Made by Creators Like You</h2>
+    <p class="section-sub">Browse what our community is making — from viral TikToks to professional commercials.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#0a0030,#200060,#4000a0)">🌌</div>
+      <button class="like-btn">♥ 2.4k</button>
+      <div class="gallery-info"><h4>Space Explorer</h4><span>@cosmicreels · Cinematic · 4K</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#200010,#600030,#c00060)">🧜</div>
+      <button class="like-btn">♥ 8.1k</button>
+      <div class="gallery-info"><h4>Underwater Mermaid</h4><span>@oceandreams · VFX Effect</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#100000,#400010,#900030)">🔥</div>
+      <button class="like-btn">♥ 5.6k</button>
+      <div class="gallery-info"><h4>Flame Warrior</h4><span>@epiccontent · Anime Style</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#001020,#002050,#0050c0)">🤖</div>
+      <button class="like-btn">♥ 3.2k</button>
+      <div class="gallery-info"><h4>Cyber City</h4><span>@futureframes · Sora 2</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#001000,#003020,#006040)">🌿</div>
+      <button class="like-btn">♥ 4.7k</button>
+      <div class="gallery-info"><h4>Enchanted Forest</h4><span>@naturevfx · Drone Shot</span></div>
+    </div>
+    <div class="gallery-card">
+      <div class="gallery-thumb" style="background:linear-gradient(160deg,#200000,#600020,#c06000)">🧛</div>
+      <button class="like-btn">♥ 6.9k</button>
+      <div class="gallery-info"><h4>Noble Vampire</h4><span>@darkarts · Creepy Effect</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VS COMPARE -->
+<section>
+  <div class="center">
+    <span class="section-label">Why CinemaAI</span>
+    <h2 class="section-title">Better Than the Competition</h2>
+    <p class="section-sub">See how we compare to Higgsfield and other AI video platforms.</p>
+  </div>
+  <div class="compare-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th style="color:var(--accent3)">CinemaAI ✓</th>
+          <th>Higgsfield</th>
+          <th>Runway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Free Plan — No Credit Card</td>
+          <td class="us">✓ Always Free</td>
+          <td class="them">Limited (2 gens)</td>
+          <td class="them">Limited</td>
+        </tr>
+        <tr>
+          <td>Camera Motion Presets</td>
+          <td class="us">50+ Presets</td>
+          <td class="them">40+ Presets</td>
+          <td class="them">Basic</td>
+        </tr>
+        <tr class="highlight">
+          <td>VFX Effects Library</td>
+          <td class="us">100+ Effects</td>
+          <td class="them">Limited</td>
+          <td class="them">Some</td>
+        </tr>
+        <tr>
+          <td>4K Export</td>
+          <td class="us">✓ Free Tier</td>
+          <td class="them">Paid only</td>
+          <td class="them">Paid only</td>
+        </tr>
+        <tr class="highlight">
+          <td>LipSync Studio</td>
+          <td class="us">✓ Included</td>
+          <td class="them">✓ Paid</td>
+          <td class="them">✗</td>
+        </tr>
+        <tr>
+          <td>No Watermark</td>
+          <td class="us">✓ Free</td>
+          <td class="them">Paid only</td>
+          <td class="them">Paid only</td>
+        </tr>
+        <tr class="highlight">
+          <td>AI Models</td>
+          <td class="us">Sora 2, Veo 3, Own</td>
+          <td class="them">Sora 2, Veo 3.1</td>
+          <td class="them">Gen-3</td>
+        </tr>
+        <tr>
+          <td>Community Gallery</td>
+          <td class="us">✓ Full Access</td>
+          <td class="them">✓</td>
+          <td class="them">Limited</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background:var(--dark);" id="pricing">
+  <div class="center">
+    <span class="section-label">Pricing</span>
+    <h2 class="section-title">Start Free. Scale When Ready.</h2>
+    <p class="section-sub">No credit card required. No hidden limits. The free plan is genuinely powerful.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Free</div>
+      <div class="price-amount">$0<span>/month</span></div>
+      <div class="price-desc">For creators just getting started</div>
+      <ul class="price-features">
+        <li>10 video generations/day</li>
+        <li>HD 1080p export</li>
+        <li>No watermark</li>
+        <li>50+ camera presets</li>
+        <li>30+ VFX effects</li>
+        <li>AI image generator</li>
+        <li class="no">4K export</li>
+        <li class="no">Priority generation</li>
+      </ul>
+      <button class="price-btn price-btn-outline">Get Started Free</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">🔥 Most Popular</div>
+      <div class="price-name">Creator</div>
+      <div class="price-amount">$12<span>/month</span></div>
+      <div class="price-desc">For content creators and influencers</div>
+      <ul class="price-features">
+        <li>120 video generations/month</li>
+        <li>4K Ultra HD export</li>
+        <li>No watermark</li>
+        <li>50+ camera presets</li>
+        <li>100+ VFX effects</li>
+        <li>LipSync Studio</li>
+        <li>Video Upscaler</li>
+        <li>Priority generation</li>
+      </ul>
+      <button class="price-btn price-btn-fill">Start Creator Plan</button>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Pro</div>
+      <div class="price-amount">$39<span>/month</span></div>
+      <div class="price-desc">For agencies and professional teams</div>
+      <ul class="price-features">
+        <li>Unlimited generations</li>
+        <li>4K + 8K export</li>
+        <li>Commercial license</li>
+        <li>All models (Sora 2, Veo 3)</li>
+        <li>API access</li>
+        <li>Team collaboration</li>
+        <li>White-label exports</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="price-btn price-btn-outline">Go Pro</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="center">
+    <span class="section-label">Testimonials</span>
+    <h2 class="section-title">Loved by 500k+ Creators</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I created my first TikTok Reel in under 10 minutes and it hit 2 million views. The camera presets are absolutely insane — felt like I had a full film crew."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:rgba(124,58,237,0.2);color:var(--accent3)">PR</div>
+        <div><div class="testi-name">Priya R.</div><div class="testi-role">Lifestyle Creator · 1.2M followers</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"We replaced our entire video production workflow with CinemaAI. What used to take 3 days now takes 30 minutes. Our ad click-through rates doubled."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:rgba(6,182,212,0.2);color:var(--teal)">AK</div>
+        <div><div class="testi-name">Aarav K.</div><div class="testi-role">Marketing Lead · D2C Brand</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The free plan alone is better than what most paid tools offer. The LipSync Studio is a game-changer for my podcast clips. This is the future of content."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:rgba(236,72,153,0.2);color:var(--pink)">SM</div>
+        <div><div class="testi-name">Shreya M.</div><div class="testi-role">Podcaster & YouTuber</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--dark);" id="faq">
+  <div class="center">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Common Questions</h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">Is CinemaAI really free? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes — completely. No credit card required. The free plan gives you 10 video generations per day, 1080p HD export with no watermark, and access to 30+ VFX effects and all 50 camera presets. Most creators never need to upgrade.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How long does video generation take? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Most videos generate in 20–60 seconds, depending on length and complexity. Pro users get priority queue access for even faster results. We also support concurrent job processing on Creator and Pro plans.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I use videos commercially? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Free and Creator plan videos can be used for personal and social media content. The Pro plan includes full commercial licensing, making it ideal for ad campaigns, client projects, and brand content.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Which AI models do you use? <span class="faq-icon">+</span></div>
+      <div class="faq-a">We support OpenAI Sora 2, Google Veo 3 (with native audio), and our own proprietary CinemaAI DOP model optimized for cinematic camera work. Pro users can switch between models per generation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What formats can I export in? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Export in MP4, MOV, and WebM. Resolution options: 720p (free), 1080p HD (free), 4K (Creator+), 8K (Pro). All exports are optimized for TikTok, Instagram Reels, YouTube Shorts, and professional production.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is there an API for developers? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes! The CinemaAI API is available on the Pro plan. Integrate video generation, image creation, and VFX effects directly into your own apps and workflows via our RESTful API with full documentation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <span class="section-label">Get Started</span>
+  <h2>Create Your First Cinematic Video<br>in 60 Seconds — Free</h2>
+  <p>Join 500,000+ creators already using CinemaAI to make viral content, stunning ads, and cinematic art.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <button class="btn-primary" style="font-size:1.05rem;padding:1rem 2.5rem;">🎬 Start Creating Free</button>
+    <button class="btn-outline" style="font-size:1.05rem;padding:1rem 2.5rem;">Watch Demo</button>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.82rem;color:var(--muted)">No credit card · No watermark · No limits on the essentials</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CinemaAI</div>
+      <p>The free AI video platform for creators, marketers, and filmmakers. Create cinematic videos from photos and text — no skills required.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="#">Text to Video</a>
+      <a href="#">Image to Video</a>
+      <a href="#">VFX Effects</a>
+      <a href="#">Cinema Studio</a>
+      <a href="#">LipSync</a>
+      <a href="#">Upscaler</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Documentation</a>
+      <a href="#">API Reference</a>
+      <a href="#">Changelog</a>
+      <a href="#">Blog</a>
+      <a href="#">Tutorials</a>
+      <a href="#">Community</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 CinemaAI. All rights reserved. Built for creators worldwide.</p>
+    <div class="social-links">
+      <a href="#">Twitter / X</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">YouTube</a>
+      <a href="#">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+document.querySelectorAll('.gallery-card .like-btn').forEach(btn=>{
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    const liked=this.dataset.liked;
+    if(liked){
+      this.style.color='';
+      delete this.dataset.liked;
+    } else {
+      this.style.color='#ec4899';
+      this.dataset.liked='1';
+    }
+  });
+});
+
+document.querySelectorAll('.preset-chip').forEach(chip=>{
+  chip.addEventListener('click',function(){
+    this.style.background='rgba(124,58,237,0.2)';
+    this.style.borderColor='rgba(124,58,237,0.6)';
+  });
+});
+</script>
+</body>
+</html>
