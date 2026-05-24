@@ -478,7 +478,9 @@ footer{
   <h1>Create <span>Cinematic AI Videos</span><br>From a Single Photo</h1>
   <p>Transform your photos & ideas into stunning, viral-ready videos with 50+ camera presets, wild VFX effects, and Hollywood-grade AI models — all free to start.</p>
   <div class="hero-btns">
-    <button class="btn-primary" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">🎬 Create Free Video</button>
+    <button onclick="googleLogin()" class="btn-primary">
+  Login with Google
+</button>
     <button class="btn-outline" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
   </div>
   <div class="hero-stats">
@@ -783,7 +785,7 @@ footer{
       <div class="price-amount">$0<span>/month</span></div>
       <div class="price-desc">For creators just getting started</div>
       <ul class="price-features">
-        <li>2 video generations/day</li>
+        <li>10 video generations/day</li>
         <li>HD 1080p export</li>
         <li>No watermark</li>
         <li>50+ camera presets</li>
@@ -985,5 +987,52 @@ document.querySelectorAll('.preset-chip').forEach(chip=>{
   });
 });
 </script>
-</body>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCTlWdrLQNCMO1Z-hu_8swgX1XCgwMnRGI",
+  authDomain: "cinemaai-829c1.firebaseapp.com",
+  projectId: "cinemaai-829c1",
+  storageBucket: "cinemaai-829c1.firebasestorage.app",
+  messagingSenderId: "1087161060896",
+  appId: "1:1087161060896:web:9cd3f147916f2ef8857645"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+window.googleLogin = async function () {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    alert("Welcome " + result.user.displayName);
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+window.logout = async function () {
+  await signOut(auth);
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Logged in:", user.email);
+  } else {
+    console.log("Logged out");
+  }
+});
+
+</script></body>
 </html>
